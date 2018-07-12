@@ -75,7 +75,7 @@ def download(video_url, video_list):
         with open(path + video_list[i]['title'] + '.mp4', 'wb') as f:
             print("-------------------------STart LINE-------------------------")
             print("第"+ str(i)+ "个视频:" + video_list[i]['title'] + " 开始下载")
-            f.write(requests.get(video_url[i], headers = headers).content)
+            f.write(requests.get(video_url[i], headers = headers,verify = False).content)
             print( "下载完成")
             print("-------------------------STop LINE-------------------------")
     print("Done~")
