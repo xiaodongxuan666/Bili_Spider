@@ -31,15 +31,25 @@ def get_Mainpage_Video(User_Mid):
     
     content = requests.get(url, headers = headers, verify = False).json()
     i = content['data']['count'] # 视频个数
-    video_List=[]
-    for num in range(i):
-        aid =  content['data']['vlist'][num]['aid']
-        title = content['data']['vlist'][num]['title']
-        author = content['data']['vlist'][num]['author']
-        tmp = {"aid":aid,"title":title,"author":author}
-        video_List.append(tmp)
-    print("Up猪:" + str(video_List[0]["author"]) + "本次共有" + str(i) + "个视频")
-    return video_List 
+    if i>=100:
+        i = 100
+        video_List=[]
+        for num in range(i):
+            aid =  content['data']['vlist'][num]['aid']
+            title = content['data']['vlist'][num]['title']
+            author = content['data']['vlist'][num]['author']
+            tmp = {"aid":aid,"title":title,"author":author}
+            video_List.append(tmp)
+        return video_List
+    else:
+        video_List=[]
+        for num in range(i):
+            aid =  content['data']['vlist'][num]['aid']
+            title = content['data']['vlist'][num]['title']
+            author = content['data']['vlist'][num]['author']
+            tmp = {"aid":aid,"title":title,"author":author}
+            video_List.append(tmp)
+        return video_List
 
 
 #  拿下载视频的Url
