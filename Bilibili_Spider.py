@@ -105,15 +105,18 @@ def download(i,Video_List,path):
         'Accept-Language': 'zh-CN,zh;q=0.9',                 
         }
     title = sub(str(Video_List[i]['title']))  # 防止有不合法的命名符号出现。
-    with open(path + title + '.mp4', 'wb') as f:
-        print("-------------------------STart LINE-------------------------")
-        localtime = time.strftime("%Y-%m-%d %H:%M:%S")
-        print(localtime + "第"+ str(i+1)+ "个视频:" + Video_List[i]['title'] + " 开始下载")
-        f.write(requests.get(Video_Url[0], headers = headers, verify = False).content)
-        
-        localtime = time.strftime("%Y-%m-%d %H:%M:%S")
-        print( localtime + "下载完成")
-        print("-------------------------STop LINE-------------------------")
+    if not os.path.exists(path + title + '.mp4'):
+        with open(path + title + '.mp4', 'wb') as f:
+            print("-------------------------STart LINE-------------------------")
+            localtime = time.strftime("%Y-%m-%d %H:%M:%S")
+            print(localtime + "第"+ str(i+1)+ "个视频:" + Video_List[i]['title'] + " 开始下载")
+            f.write(requests.get(Video_Url[0], headers = headers, verify = False).content)
+
+            localtime = time.strftime("%Y-%m-%d %H:%M:%S")
+            print( localtime + "下载完成")
+            print("-------------------------STop LINE-------------------------")
+    else:
+        print("视频    "  + title + "      存在于本地，跳过下载")
 
 # 主函数
 def main():
