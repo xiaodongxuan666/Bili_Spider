@@ -11,6 +11,10 @@ import re
 import os
 import requests
 import time
+import datetime
+
+
+start_time = datetime.datetime.now()
 
 # 从主页拿视频列表的函数
 def get_Mainpage_Video(User_Mid):
@@ -130,4 +134,9 @@ def main():
 
 if __name__=='__main__':
     main()
-    
+
+end_time = datetime.datetime.now() 
+minus = end_time - start_time
+consume = minus.total_seconds()
+print( "总共用时:"+str(round(consume,1))+"s")
+
