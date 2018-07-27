@@ -96,10 +96,13 @@ def download(i,Video_List,path):
     url_patn = re.compile(r'"url":"(.*?)","backup_url"')
     Video_Url = []
     Video_Url.append(re.findall(url_patn, html)[0])   # 这个是URL  
+    print(Video_Url[0])
+    host_patn = re.compile('http://(.*?)/upgcxcode')
+    host = re.findall(host_patn, Video_Url[0])[0]
     
     #下面是下载内容
     headers = {
-        'Host': 'data.bilibili.com', 
+        'Host': host, 
         'Connection': 'keep-alive',
         'Origin': 'https://www.bilibili.com',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
